@@ -2,20 +2,29 @@ package factj.test.decorators;
 
 import static factj.FactJHelper.field;
 import static factj.FactJHelper.sequence;
-import junit.framework.TestCase;
-import factj.FactJHelper;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
 import factj.Decorator;
 import factj.FactJ;
+import factj.FactJHelper;
 import factj.decorators.AssociationDecorator;
 import factj.test.PersistenceTest;
 import factj.test.models.Address;
 import factj.test.models.Address2;
 import factj.test.models.Person;
 
-public class AssociationDecoratorTest extends TestCase {
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+@RunWith(JUnit4.class)
+public class AssociationDecoratorTest {
+	@Before
+	public void setUp() throws Exception {
 		FactJHelper.fabricate(Address.class,
 				sequence("id"),
 				field("address", "Street X"));
@@ -30,6 +39,7 @@ public class AssociationDecoratorTest extends TestCase {
 				field("neighborhood", "Test 2"));
 	}
 
+	@Test
 	public void testGivesValueToField() {
 		PersistenceTest per = new PersistenceTest();
 		FactJ.setPersistence(per);
@@ -43,6 +53,7 @@ public class AssociationDecoratorTest extends TestCase {
 		assertTrue("It should have called save(Object) on persistence", per.called);
 	}
 
+	@Test
 	public void testUsesSecondFactory() {
 		Decorator d = new AssociationDecorator("address", "secondFactory");
 		Person p = new Person();
@@ -52,6 +63,7 @@ public class AssociationDecoratorTest extends TestCase {
 				p.getAddress().getAddress());
 	}
 
+	@Test
 	public void testUsesAnotherClass() {
 		Decorator d = new AssociationDecorator("address", Address2.class);
 		Person p = new Person();
@@ -61,6 +73,7 @@ public class AssociationDecoratorTest extends TestCase {
 				((Address2)p.getAddress()).getNeighborhood());
 	}
 
+	@Test
 	public void testUsesAnotherClassAndAnotherFactoryName() {
 		Decorator d = new AssociationDecorator("address", Address2.class, "secondFactory");
 		Person p = new Person();
@@ -70,9 +83,8 @@ public class AssociationDecoratorTest extends TestCase {
 				((Address2)p.getAddress()).getNeighborhood());
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		FactJ.clear();
-		super.tearDown();
 	}
 }

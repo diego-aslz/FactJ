@@ -4,17 +4,26 @@ import static factj.FactJHelper.association;
 import static factj.FactJHelper.fabricate;
 import static factj.FactJHelper.field;
 import static factj.FactJHelper.sequence;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
 import factj.FactJ;
 import factj.decorators.SequenceDecorator.Sequence;
 import factj.test.PersistenceTest;
 import factj.test.models.Address;
 import factj.test.models.Person;
 
-public class FactJTest extends TestCase {
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+@RunWith(JUnit4.class)
+public class FactJTest {
+	@Before
+	public void setUp() throws Exception {
 		Sequence emailSequence = new Sequence() {
 			@Override
 			public Object generate(int count) {
@@ -32,6 +41,7 @@ public class FactJTest extends TestCase {
 				association("address"));
 	}
 
+	@Test
 	public void testFactJ() {
 		Person p = (Person) FactJ.build(Person.class);
 		assertEquals("Built wrong id", 1, p.getId());
@@ -48,6 +58,7 @@ public class FactJTest extends TestCase {
 		assertEquals("Built wrong address address", "An address", p.getAddress().getAddress());
 	}
 
+	@Test
 	public void testPersistence() {
 		PersistenceTest p = new PersistenceTest();
 		FactJ.setPersistence(p);
@@ -64,9 +75,8 @@ public class FactJTest extends TestCase {
 		assertTrue("It should have called save(Object) on persistence", p.called);
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		FactJ.clear();
-		super.tearDown();
 	}
 }

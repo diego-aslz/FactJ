@@ -1,12 +1,19 @@
 package factj.test.decorators;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
 import factj.Decorator;
 import factj.decorators.SequenceDecorator;
 import factj.decorators.SequenceDecorator.Sequence;
 import factj.test.models.Person;
 
-public class SequenceDecoratorTest extends TestCase {
+@RunWith(JUnit4.class)
+public class SequenceDecoratorTest {
+	@Test
 	public void testGivesValueOfSequenceWhenProvided() {
 		Decorator d = new SequenceDecorator("name", new Sequence() {
 			@Override
@@ -21,6 +28,7 @@ public class SequenceDecoratorTest extends TestCase {
 		assertEquals("SequenceDecorator did not give the correct value", "person 2", p.getName());
 	}
 
+	@Test
 	public void testGivesSequenceValueWhenNoSequenceIsProvided() {
 		Decorator d = new SequenceDecorator("id");
 		Person p = new Person();
