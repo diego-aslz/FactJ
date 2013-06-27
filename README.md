@@ -48,7 +48,7 @@ To use the factory, do:
 ```java
   // ...
     AddressFactory.load();
-    Address address1 = FactJ.build(Address.class));
+    Address address1 = (Address) FactJ.build(Address.class));
     System.out.println(address1.getAddress()); // Will print "Some address".
   // ...
 ```
@@ -108,13 +108,11 @@ public abstract class PersonFactory {
   static {
     fabricate(Person.class,
         field("name", "Diego"),
-        field("client", false),
-        association("address");
+        field("client", false));
 
     fabricate(Person.class, "clients",
         field("name", "Diego"),
-        field("client", true),
-        association("address");
+        field("client", true));
   }
 
   // ...
@@ -181,7 +179,7 @@ import myapp.models.Person;
 public abstract class PersonFactory {
   static {
     fabricate(Person.class,
-        sequence(id), // You may not want to set this field when persisting object to a database.
+        sequence("id"), // You may not want to set this field when persisting object to a database.
         field("name", "Diego"),
         field("email", "mymail@gmail.com"));
   }
@@ -209,7 +207,7 @@ import myapp.models.Person;
 public abstract class PersonFactory {
   static {
     fabricate(Person.class,
-        sequence(id), // You may not want to set this field when persisting object to a database.
+        sequence("id"), // You may not want to set this field when persisting object to a database.
         field("name", "Diego"),
         sequence("email", new Sequence() {
           @Override
