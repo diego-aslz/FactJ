@@ -44,7 +44,7 @@ public class AssociationDecoratorTest {
 		PersistenceTest per = new PersistenceTest();
 		FactJ.setPersistence(per);
 
-		Decorator d = new AssociationDecorator("address");
+		Decorator<Object> d = new AssociationDecorator("address");
 		Person p = new Person();
 		d.decorate(p);
 		assertNotNull("AssociationDecorator did not build the object", p.getAddress());
@@ -55,7 +55,7 @@ public class AssociationDecoratorTest {
 
 	@Test
 	public void testUsesSecondFactory() {
-		Decorator d = new AssociationDecorator("address", "secondFactory");
+		Decorator<Object> d = new AssociationDecorator("address", "secondFactory");
 		Person p = new Person();
 		d.decorate(p);
 		assertNotNull("AssociationDecorator did not build the object", p.getAddress());
@@ -65,7 +65,7 @@ public class AssociationDecoratorTest {
 
 	@Test
 	public void testUsesAnotherClass() {
-		Decorator d = new AssociationDecorator("address", Address2.class);
+		Decorator<Object> d = new AssociationDecorator("address", Address2.class);
 		Person p = new Person();
 		d.decorate(p);
 		assertNotNull("AssociationDecorator did not build the object", p.getAddress());
@@ -75,7 +75,7 @@ public class AssociationDecoratorTest {
 
 	@Test
 	public void testUsesAnotherClassAndAnotherFactoryName() {
-		Decorator d = new AssociationDecorator("address", Address2.class, "secondFactory");
+		Decorator<Object> d = new AssociationDecorator("address", Address2.class, "secondFactory");
 		Person p = new Person();
 		d.decorate(p);
 		assertNotNull("AssociationDecorator did not build the object", p.getAddress());

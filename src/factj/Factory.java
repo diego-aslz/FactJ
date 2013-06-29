@@ -8,7 +8,7 @@ package factj;
 public class Factory {
 	protected Class<?> clazz;
 	protected String name;
-	protected Decorator[] decorators;
+	protected Decorator<?>[] decorators;
 
 	public Factory(Class<?> clazz) {
 		this(clazz, (Decorator[])null);
@@ -20,7 +20,7 @@ public class Factory {
 	 * @param clazz Class of the objects this factory will build.
 	 * @param decorators Array of {@link Decorator} that customize the objects.
 	 */
-	public Factory(Class<?> clazz, Decorator ... decorators) {
+	public Factory(Class<?> clazz, Decorator<?> ... decorators) {
 		this(clazz, "", decorators);
 	}
 
@@ -31,7 +31,7 @@ public class Factory {
 	 * @param name The factory's name that distinguishes it from other factories of the same Class.
 	 * @param decorators Array of {@link Decorator} that customize the objects.
 	 */
-	public Factory(Class<?> clazz, String name, Decorator ... decorators) {
+	public Factory(Class<?> clazz, String name, Decorator<?> ... decorators) {
 		this.clazz = clazz;
 		this.name = name;
 		this.decorators = decorators;
@@ -58,6 +58,7 @@ public class Factory {
 	 * {@link #clazz} will be created and all the {@link #decorators} will be called on it.
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object fabricate() {
 		try {
 			Object o = clazz.newInstance();

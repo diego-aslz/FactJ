@@ -297,11 +297,11 @@ If the built-in decorators doesn't fit your needs, you can create your own:
 ```java
     fabricate(Person.class,
         field("name", "Diego"),
-        new Decorator() {
+        new Decorator<Person>() {
           @Override
-          public void decorate(Object o) {
-            // Do whatever you want, like
-            ((Person)o).setCreatedAt(MyUtils.getCurrentTime());
+          public void decorate(Person p) {
+            // Customize your object
+            p.setCreatedAt(MyUtils.getCurrentTime());
           }
         });
 ```
@@ -313,7 +313,7 @@ method `getValue()`, like this:
 ```java
     fabricate(Person.class,
         field("name", "Diego"),
-        new FieldDecorator("createdAt", null) {
+        new FieldDecorator("createdAt") {
           @Override
           public Object getValue() {
             return MyUtils.getCurrentTime();
@@ -329,10 +329,10 @@ and you don't want to modify your factory because it's a special case,
 you can do this:
 
 ```java
-    Address a = (Address) FactJ.create(Address.class, new Decorator() {
+    Address a = (Address) FactJ.create(Address.class, new Decorator<Address>() {
       @Override
-      public void decorate(Object o) {
-        ((Address)o).setAddress("another");
+      public void decorate(Address a) {
+        a.setAddress("another");
       }
     });
 ```

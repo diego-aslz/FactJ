@@ -15,7 +15,7 @@ import factj.test.models.Person;
 public class SequenceDecoratorTest {
 	@Test
 	public void testGivesValueOfSequenceWhenProvided() {
-		Decorator d = new SequenceDecorator("name", new Sequence() {
+		Decorator<Object> d = new SequenceDecorator("name", new Sequence() {
 			@Override
 			public Object generate(int count) {
 				return "person " + count;
@@ -30,7 +30,7 @@ public class SequenceDecoratorTest {
 
 	@Test
 	public void testGivesSequenceValueWhenNoSequenceIsProvided() {
-		Decorator d = new SequenceDecorator("id");
+		Decorator<Object> d = new SequenceDecorator("id");
 		Person p = new Person();
 		d.decorate(p);
 		assertEquals("SequenceDecorator did not give the correct value", 1, p.getId());

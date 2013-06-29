@@ -35,7 +35,7 @@ public class SequenceDecorator extends FieldDecorator {
 	 * to generate a new value every time an object is built.
 	 */
 	public SequenceDecorator(String fieldName, Sequence sequence) {
-		super(fieldName, null);
+		super(fieldName);
 		this.sequence = sequence;
 	}
 

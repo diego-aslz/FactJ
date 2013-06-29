@@ -50,7 +50,7 @@ public class AssociationDecorator extends FieldDecorator {
 	 * @param fieldName
 	 */
 	public AssociationDecorator(String fieldName, Class<?> factoryClass, String factoryName) {
-		super(fieldName, null);
+		super(fieldName);
 		clazz = factoryClass;
 		this.factoryName = factoryName;
 	}

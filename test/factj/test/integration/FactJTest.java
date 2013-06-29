@@ -81,10 +81,10 @@ public class FactJTest {
 		PersistenceTest p = new PersistenceTest();
 		FactJ.setPersistence(p);
 		
-		Address a = (Address) FactJ.create(Address.class, new Decorator() {
+		Address a = (Address) FactJ.create(Address.class, new Decorator<Address>() {
 			@Override
-			public void decorate(Object o) {
-				((Address)o).setAddress("another");
+			public void decorate(Address a) {
+				a.setAddress("another");
 			}
 		});
 		assertEquals("It should have customized the object.", "another", a.getAddress());

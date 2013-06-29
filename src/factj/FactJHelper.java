@@ -18,7 +18,7 @@ public abstract class FactJHelper {
 	 * @param clazz Class that the factory will concern about.
 	 * @param decorators Array of {@link Decorator} that customize the object when it gets built.
 	 */
-	public static void fabricate(Class<?> clazz, Decorator ... decorators) {
+	public static void fabricate(Class<?> clazz, Decorator<?> ... decorators) {
 		FactJ.registerFactory(new Factory(clazz, decorators));
 	}
 
@@ -29,7 +29,7 @@ public abstract class FactJHelper {
 	 * @param clazz Class that the factory will concern about.
 	 * @param decorators Array of {@link Decorator} that customize the objects when they get built.
 	 */
-	public static void fabricate(Class<?> clazz, String name, Decorator ... decorators) {
+	public static void fabricate(Class<?> clazz, String name, Decorator<?> ... decorators) {
 		FactJ.registerFactory(new Factory(clazz, name, decorators));
 	}
 
@@ -39,7 +39,7 @@ public abstract class FactJHelper {
 	 * @param value The value the field will receive.
 	 * @return A {@link FieldDecorator} implementation.
 	 */
-	public static Decorator field(String fieldName, Object value) {
+	public static Decorator<Object> field(String fieldName, Object value) {
 		return new FieldDecorator(fieldName, value);
 	}
 
@@ -49,7 +49,7 @@ public abstract class FactJHelper {
 	 * @param sequence The {@link Sequence} that needs to get called to customize the field.
 	 * @return A {@link SequenceDecorator} implementation.
 	 */
-	public static Decorator sequence(String fieldName, Sequence sequence) {
+	public static Decorator<Object> sequence(String fieldName, Sequence sequence) {
 		return new SequenceDecorator(fieldName, sequence);
 	}
 
@@ -60,7 +60,7 @@ public abstract class FactJHelper {
 	 * @param fieldName The name of the field that needs to be changed.
 	 * @return A {@link SequenceDecorator} implementation.
 	 */
-	public static Decorator sequence(String fieldName) {
+	public static Decorator<Object> sequence(String fieldName) {
 		return new SequenceDecorator(fieldName, null);
 	}
 
@@ -70,7 +70,7 @@ public abstract class FactJHelper {
 	 * @param fieldName The name of the field that needs to be changed.
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
-	public static Decorator association(String fieldName) {
+	public static Decorator<Object> association(String fieldName) {
 		return new AssociationDecorator(fieldName);
 	}
 
@@ -80,7 +80,7 @@ public abstract class FactJHelper {
 	 * @param fieldName The name of the field that needs to be changed.
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
-	public static Decorator association(String fieldName, String factoryName) {
+	public static Decorator<Object> association(String fieldName, String factoryName) {
 		return new AssociationDecorator(fieldName, factoryName);
 	}
 
@@ -90,7 +90,7 @@ public abstract class FactJHelper {
 	 * @param fieldName The name of the field that needs to be changed.
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
-	public static Decorator association(String fieldName, Class<?> factoryClass) {
+	public static Decorator<Object> association(String fieldName, Class<?> factoryClass) {
 		return new AssociationDecorator(fieldName, factoryClass);
 	}
 
@@ -100,7 +100,7 @@ public abstract class FactJHelper {
 	 * @param fieldName The name of the field that needs to be changed.
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
-	public static Decorator association(String fieldName, Class<?> factoryClass, String factoryName) {
+	public static Decorator<Object> association(String fieldName, Class<?> factoryClass, String factoryName) {
 		return new AssociationDecorator(fieldName, factoryClass, factoryName);
 	}
 }

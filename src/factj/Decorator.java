@@ -6,6 +6,6 @@ package factj;
  * @author Diego Aguir Selzlein
  *
  */
-public interface Decorator {
-	public void decorate(Object o);
+public interface Decorator<T> {
+	public void decorate(T o);
 }

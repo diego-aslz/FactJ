@@ -14,7 +14,7 @@ import factj.test.models.Person;
 public class FieldDecoratorTest {
 	@Test
 	public void testGivesValueToField() {
-		Decorator d = new FieldDecorator("name", "This is a test!");
+		Decorator<Object> d = new FieldDecorator("name", "This is a test!");
 		Person p = new Person();
 		d.decorate(p);
 		assertEquals("FieldDecorator did not give the correct value", "This is a test!",

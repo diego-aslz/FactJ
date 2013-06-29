@@ -78,7 +78,7 @@ public final class FactJ {
 	 * @return The object built by the factory or <strong>null</strong> if the factory
 	 * was not found.
 	 */
-	public static Object build(Class<?> clazz, Decorator ... decorators) {
+	public static Object build(Class<?> clazz, Decorator<?> ... decorators) {
 		return build(clazz, "", decorators);
 	}
 
@@ -90,7 +90,7 @@ public final class FactJ {
 	 * @param decorators Used to customize the object after it is built.
 	 * @return
 	 */
-	public static Object create(Class<?> clazz, Decorator ... decorators) {
+	public static Object create(Class<?> clazz, Decorator<?> ... decorators) {
 		return save(build(clazz, decorators));
 	}
 
@@ -135,7 +135,8 @@ public final class FactJ {
 	 * @return The object built by the factory or <strong>null</strong> if the factory
 	 * was not found.
 	 */
-	public static Object build(Class<?> clazz, String name, Decorator ... decorators) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static Object build(Class<?> clazz, String name, Decorator<?> ... decorators) {
 		List<Factory> fs = factories.get(clazz);
 		if (name == null)
 			name = "";
@@ -160,7 +161,7 @@ public final class FactJ {
 	 * @param decorators Used to customize the object after it is built.
 	 * @return
 	 */
-	public static Object create(Class<?> clazz, String name, Decorator ... decorators) {
+	public static Object create(Class<?> clazz, String name, Decorator<?> ... decorators) {
 		return save(build(clazz, name, decorators));
 	}
 

@@ -2,6 +2,8 @@
 
 ## v1.1 (being built)
 
+* **IMPROVEMENT**: Generic Types in Decorator;
+* **IMPROVEMENT**: Constructor overloaded in FieldDecorator;
 * **FEATURE**: Object customization while building.
 
 ## v1.0

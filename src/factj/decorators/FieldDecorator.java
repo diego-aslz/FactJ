@@ -9,11 +9,18 @@ import factj.Decorator;
  * @author Diego Aguir Selzlein
  *
  */
-public class FieldDecorator implements Decorator {
+public class FieldDecorator implements Decorator<Object> {
 	protected String fieldName;
 	protected Object value;
 
 	protected Object object;
+
+	/**
+	 * @param fieldName The name of the field that will be changed.
+	 */
+	public FieldDecorator(String fieldName) {
+		this(fieldName, null);
+	}
 
 	/**
 	 * @param fieldName The name of the field that will be changed.
