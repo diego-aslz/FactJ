@@ -1,10 +1,13 @@
 # FactJ
 
 This API was built to be used in Java applications in order to build objects.
+It helps, mainly, developers who create unit tests and need some organized
+way of building objects to use while testing. It is similar to the
+[FactoryGirl][1] project that is made for Ruby applications.
 
 ## Installation
 
-Add the factj-vX.X.jar file to your classpath.
+Download the JAR from [here][2] and add it to your classpath.
 
 ## Factories
 
@@ -88,7 +91,7 @@ And, before you create objects:
 ```
 
 Note that instead of `FactJ.build` we call `FactJ.create`
-that does the same thing as the first one, but <strong>saves</strong> the
+that does the same thing as the first one, but **saves** the
 object after it's built. The method `MyPersistence.save` will be
 called every time the `FactJ.create` method is invoked.
 
@@ -121,7 +124,7 @@ public abstract class PersonFactory {
 
 Here we created two factories for Person.class. The first one doesn't have
 a name and will be de default factory. However, the second one
-<strong>does</strong> have a name, it's "clients".
+**does** have a name, it's "clients".
 Notice that the second one sets the field `client` to `true`. To use them:
 
 ```java
@@ -135,7 +138,7 @@ Using the name of the factory, FactJ will select the correct one to call.
 ## Customizing Fields
 
 A Factory receives a bunch of `Decorator` objects in its constructor.
-They are used to modify something in the object being built. For each object
+They are used to modify something in the object when it's built. For each object
 built, all of the decorators will be invoked to customize it.
 
 There are a few built-in helper methods that helps out defining decorators.
@@ -253,7 +256,7 @@ That's it. The decorator that `association` returns will lookup for
 the Class of the given field and invoke `FactJ.create` passing
 the field's Class to it. The object returned by FactJ will be set on the field.
 
-It is <strong>important</strong> to notice that every association will be
+It is **important** to notice that every association will be
 persisted in the database if you set the Persistence object.
 
 Now, let's say you want to populate an association with an object of another
@@ -318,6 +321,29 @@ method `getValue()`, like this:
         });
 ```
 
+## Customizing Objects "On The Fly"
+
+Since version 1.1, it's possible to customize an object as you build it.
+If, for example, you want to customize an object before it gets saved
+and you don't want to modify your factory because it's a special case,
+you can do this:
+
+```java
+    Address a = (Address) FactJ.create(Address.class, new Decorator() {
+      @Override
+      public void decorate(Object o) {
+        ((Address)o).setAddress("another");
+      }
+    });
+```
+
+This way, only the object built in this call will be customized by that
+decorator. You can pass as many decoratos as you want to the `create`
+and `build` methods.
+
 ## Testing
 
 There is a source folder named `test`. Just run the app as JUnit Test.
+
+[1]:https://github.com/thoughtbot/factory_girl
+[2]:https://sourceforge.net/projects/factj/files/

@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import factj.Decorator;
 import factj.FactJ;
 import factj.decorators.SequenceDecorator.Sequence;
 import factj.test.PersistenceTest;
@@ -73,6 +74,22 @@ public class FactJTest {
 		assertFalse("It shouldn't have called save(Object) on persistence", p.called);
 		FactJ.create(Address.class, "");
 		assertTrue("It should have called save(Object) on persistence", p.called);
+	}
+
+	@Test
+	public void testCustomizeBuild() {
+		PersistenceTest p = new PersistenceTest();
+		FactJ.setPersistence(p);
+		
+		Address a = (Address) FactJ.create(Address.class, new Decorator() {
+			@Override
+			public void decorate(Object o) {
+				((Address)o).setAddress("another");
+			}
+		});
+		assertEquals("It should have customized the object.", "another", a.getAddress());
+		assertEquals("It should have saved the customized object.", "another", ((Address)p.
+				lastReceived).getAddress());
 	}
 
 	@After
