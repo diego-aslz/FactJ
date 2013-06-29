@@ -18,12 +18,24 @@ public class SequenceDecorator extends FieldDecorator {
 	protected int count = 1;
 
 	/**
+	 * Creates a {@link SequenceDecorator} that gives a sequential value to the field parameterized.
 	 * When no {@link Sequence} is given (see {@link #SequenceDecorator(String, Sequence)}),
 	 * the field will receive the sequence integer value itself.
 	 * @param fieldName The name of the field which value will respect a sequence.
 	 */
 	public SequenceDecorator(String fieldName) {
 		this(fieldName, null);
+	}
+
+	/**
+	 * Creates a {@link SequenceDecorator} that gives a sequential value to the field parameterized,
+	 * starting by the given <strong>initialValue</strong>.
+	 * @param fieldName The name of the field which value will respect a sequence.
+	 * @param initialValue The first value of the sequence. Default: 1.
+	 */
+	public SequenceDecorator(String fieldName, int initialValue) {
+		this(fieldName);
+		count = initialValue;
 	}
 
 	/**

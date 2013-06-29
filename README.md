@@ -345,5 +345,9 @@ and `build` methods.
 
 There is a source folder named `test`. Just run the app as JUnit Test.
 
+## See Also
+
+* [Changelog](CHANGELOG.md)
+
 [1]:https://github.com/thoughtbot/factory_girl
 [2]:https://sourceforge.net/projects/factj/files/

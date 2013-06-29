@@ -29,12 +29,22 @@ public class SequenceDecoratorTest {
 	}
 
 	@Test
-	public void testGivesSequenceValueWhenNoSequenceIsProvided() {
+	public void testGivesSequentialValue() {
 		Decorator<Object> d = new SequenceDecorator("id");
 		Person p = new Person();
 		d.decorate(p);
 		assertEquals("SequenceDecorator did not give the correct value", 1, p.getId());
 		d.decorate(p);
 		assertEquals("SequenceDecorator did not give the correct value", 2, p.getId());
+	}
+
+	@Test
+	public void testGivesSequentialValueStartingByInitValue() {
+		Decorator<Object> d = new SequenceDecorator("id", 15);
+		Person p = new Person();
+		d.decorate(p);
+		assertEquals("SequenceDecorator did not give the correct value", 15, p.getId());
+		d.decorate(p);
+		assertEquals("SequenceDecorator did not give the correct value", 16, p.getId());
 	}
 }

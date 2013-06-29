@@ -65,6 +65,16 @@ public abstract class FactJHelper {
 	}
 
 	/**
+	 * See {@link SequenceDecorator#SequenceDecorator(String, int)}.
+	 * @param fieldName The name of the field that needs to be changed.
+	 * @param initialValue The first value of the sequence. Default: 1.
+	 * @return A {@link SequenceDecorator} implementation.
+	 */
+	public static Decorator<Object> sequence(String fieldName, int initialValue) {
+		return new SequenceDecorator(fieldName, initialValue);
+	}
+
+	/**
 	 * Helper method that generates a {@link Decorator} of the type {@link AssociationDecorator}.
 	 * See {@link AssociationDecorator#AssociationDecorator(String)} for details.
 	 * @param fieldName The name of the field that needs to be changed.

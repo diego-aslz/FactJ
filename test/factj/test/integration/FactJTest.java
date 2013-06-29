@@ -36,7 +36,7 @@ public class FactJTest {
 				sequence("id"),
 				field("address", "An address"));
 		fabricate(Person.class,
-				sequence("id"),
+				sequence("id", 5),
 				field("name", "A person"),
 				sequence("email", emailSequence),
 				association("address"));
@@ -45,14 +45,14 @@ public class FactJTest {
 	@Test
 	public void testFactJ() {
 		Person p = (Person) FactJ.build(Person.class);
-		assertEquals("Built wrong id", 1, p.getId());
+		assertEquals("Built wrong id", 5, p.getId());
 		assertEquals("Built wrong name", "A person", p.getName());
 		assertEquals("Built wrong email", "user1@company.com", p.getEmail());
 		assertEquals("Built wrong address id", 1, p.getAddress().getId());
 		assertEquals("Built wrong address address", "An address", p.getAddress().getAddress());
 
 		p = (Person) FactJ.build(Person.class);
-		assertEquals("Built wrong id", 2, p.getId());
+		assertEquals("Built wrong id", 6, p.getId());
 		assertEquals("Built wrong name", "A person", p.getName());
 		assertEquals("Built wrong email", "user2@company.com", p.getEmail());
 		assertEquals("Built wrong address id", 2, p.getAddress().getId());

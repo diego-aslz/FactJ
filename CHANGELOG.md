@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## v1.1 (being built)
+## v1.1
 
+* **FEATURE**: Initial value in sequences;
 * **IMPROVEMENT**: Generic Types in Decorator;
 * **IMPROVEMENT**: Constructor overloaded in FieldDecorator;
 * **FEATURE**: Object customization while building.
