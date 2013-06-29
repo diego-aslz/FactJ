@@ -338,7 +338,7 @@ you can do this:
 ```
 
 This way, only the object built in this call will be customized by that
-decorator. You can pass as many decoratos as you want to the `create`
+decorator. You can pass as many decorators as you want to the `create`
 and `build` methods.
 
 ## Testing
