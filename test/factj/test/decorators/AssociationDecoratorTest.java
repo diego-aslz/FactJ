@@ -54,6 +54,26 @@ public class AssociationDecoratorTest {
 	}
 
 	@Test
+	public void testCustomizesGeneratedObject() {
+		PersistenceTest per = new PersistenceTest();
+		FactJ.setPersistence(per);
+
+		Decorator<Object> d = new AssociationDecorator("address", null, null, new Decorator<Address>() {
+			@Override
+			public void decorate(Address o) {
+				o.setAddress("another");
+			}
+		});
+		Person p = new Person();
+		d.decorate(p);
+		assertNotNull("AssociationDecorator did not build the object", p.getAddress());
+		assertEquals("AssociationDecorator did not use the decorator", "another",
+				p.getAddress().getAddress());
+		assertEquals("The customized object should be saved after customization", "another",
+				((Address)per.lastReceived).getAddress());
+	}
+
+	@Test
 	public void testUsesSecondFactory() {
 		Decorator<Object> d = new AssociationDecorator("address", "secondFactory");
 		Person p = new Person();

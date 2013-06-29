@@ -85,9 +85,20 @@ public abstract class FactJHelper {
 	}
 
 	/**
+	 * See {@link AssociationDecorator#AssociationDecorator(String, Class, String, Decorator...)}.
+	 * @param fieldName The name of the field that needs to be changed. 
+	 * @param decorators To customize the generated object.
+	 * @return An {@link AssociationDecorator} implementation.
+	 */
+	public static Decorator<Object> association(String fieldName, Decorator<?>... decorators) {
+		return new AssociationDecorator(fieldName, null, "", decorators);
+	}
+
+	/**
 	 * Helper method that generates a {@link Decorator} of the type {@link AssociationDecorator}.
 	 * See {@link AssociationDecorator#AssociationDecorator(String, String)} for details.
 	 * @param fieldName The name of the field that needs to be changed.
+	 * @param factoryName The name of the factory that must be used.
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
 	public static Decorator<Object> association(String fieldName, String factoryName) {
@@ -98,6 +109,7 @@ public abstract class FactJHelper {
 	 * Helper method that generates a {@link Decorator} of the type {@link AssociationDecorator}.
 	 * See {@link AssociationDecorator#AssociationDecorator(String, Class)} for details.
 	 * @param fieldName The name of the field that needs to be changed.
+	 * @param factoryClass The Class of the object that will be set to the field. 
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
 	public static Decorator<Object> association(String fieldName, Class<?> factoryClass) {
@@ -108,9 +120,25 @@ public abstract class FactJHelper {
 	 * Helper method that generates a {@link Decorator} of the type {@link AssociationDecorator}.
 	 * See {@link AssociationDecorator#AssociationDecorator(String, Class, String)} for details.
 	 * @param fieldName The name of the field that needs to be changed.
+	 * @param factoryClass The Class of the object that will be set to the field. 
+	 * @param factoryName The name of the factory that must be used.
 	 * @return An {@link AssociationDecorator} implementation.
 	 */
-	public static Decorator<Object> association(String fieldName, Class<?> factoryClass, String factoryName) {
+	public static Decorator<Object> association(String fieldName, Class<?> factoryClass,
+			String factoryName) {
 		return new AssociationDecorator(fieldName, factoryClass, factoryName);
+	}
+
+	/**
+	 * See {@link AssociationDecorator#AssociationDecorator(String, Class, String, Decorator...)}.
+	 * @param fieldName The name of the field that needs to be changed. 
+	 * @param factoryClass The Class of the object that will be set to the field. 
+	 * @param factoryName The name of the factory that must be used.
+	 * @param decorators To customize the generated object.
+	 * @return An {@link AssociationDecorator} implementation.
+	 */
+	public static Decorator<Object> association(String fieldName, Class<?> factoryClass,
+			String factoryName, Decorator<?>... decorators) {
+		return new AssociationDecorator(fieldName, factoryClass, factoryName, decorators);
 	}
 }

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2 (being built)
+
+* **IMPROVEMENT**: Added customization support to AssociationDecorator.
+
 ## v1.1
 
 * **FEATURE**: Initial value in sequences;
