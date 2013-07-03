@@ -351,3 +351,5 @@ There is a source folder named `test`. Just run the app as JUnit Test.
 
 [1]:https://github.com/thoughtbot/factory_girl
 [2]:https://sourceforge.net/projects/factj/files/
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/ba8147ab9e41653f76515c8487b67ad7 "githalytics.com")](http://githalytics.com/nerde/FactJ)
